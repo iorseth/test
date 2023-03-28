@@ -2,6 +2,11 @@ const pianoNotes = {
   "C4": "path/to/C4.mp3",
   "D4": "path/to/D4.mp3",
   "E4": "path/to/E4.mp3",
+  "F4": "path/to/C4.mp3",
+  "G4": "path/to/D4.mp3",
+  "A4": "path/to/E4.mp3",
+  "B4": "path/to/E4.mp3",
+  "C5": "path/to/E4.mp3",
   // Add more piano notes as needed
 };
 

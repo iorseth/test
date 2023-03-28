@@ -88,4 +88,5 @@ body {
 
 #resultMessage {
   margin-top: 250px;
+  display: none;
 }
