@@ -42,9 +42,9 @@ function displayNoteChoices(trueNote, falseNote) {
   const firstNote = randomOrder ? trueNote : falseNote;
   const secondNote = randomOrder ? falseNote : trueNote;
 
-noteChoicesContainer.innerHTML = `
-    <span class="note-choice font-weight-bold me-2" data-note="${firstNote}" style="cursor:pointer; color: ${getNoteColor(firstNote)};">${firstNote}</span>
-    <span class="note-choice font-weight-bold" data-note="${secondNote}" style="cursor:pointer; color: ${getNoteColor(secondNote)};">${secondNote}</span>
+	noteChoicesContainer.innerHTML = `
+    <div class="note-choice" data-note="${firstNote}" style="cursor:pointer; color: ${getNoteColor(firstNote)};">${firstNote}</div>
+    <div class="note-choice" data-note="${secondNote}" style="cursor:pointer; color: ${getNoteColor(secondNote)};">${secondNote}</div>
 `;
 
 
