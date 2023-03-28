@@ -38,9 +38,8 @@ def config():
 
 @app.route('/chart', methods=['GET', 'POST'])
 def chart():
-    config_data = monitor.load_data(CONFIG_FILE)
-    response_data = monitor.load_data(DATA_FILE)
-    return render_template('chart.html', config_data=config_data, response_data=response_data)
+    response_data = monitor.load_data(DATA_FILE, default_data={"urls": [], "max_urls": 3})
+    return render_template('chart.html', config_data=g.config_data, response_data=response_data)
 
 
 if __name__ == '__main__':

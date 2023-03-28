@@ -12,14 +12,22 @@ def safe_load_json(file):
         return []
 
 
-def load_data(filename):
-    try:
-        with open(filename, 'r') as file:
-            data = safe_load_json(file)
-    except FileNotFoundError:
-        data = []
-    return data
+def load_data(file_path, create_if_missing=True):
+    default_data = {
+        "urls": [],
+        "max_urls": 3
+    }
 
+    if create_if_missing and not os.path.exists(file_path):
+        save_data(file_path, default_data)
+
+    with open(file_path, 'r') as f:
+        try:
+            data = json.load(f)
+        except json.JSONDecodeError:
+            data = default_data
+
+    return data
 
 def save_data(filename, data):
     with open(filename, 'w') as file:
