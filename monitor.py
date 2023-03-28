@@ -7,16 +7,12 @@ from datetime import datetime
 DATA_FILE = 'data.json'
 
 # Add this function to your existing monitor.py file
-def load_data():
-    if not os.path.exists(DATA_FILE):
-        return {}
-
-    with open(DATA_FILE, 'r') as file:
-        try:
+def load_data(filename):
+    try:
+        with open(filename, 'r') as file:
             data = json.load(file)
-        except json.JSONDecodeError:
-            data = {}
-
+    except (FileNotFoundError, json.JSONDecodeError):
+        data = []
     return data
 
 def load_config():
