@@ -4,14 +4,24 @@ import os
 import json
 from datetime import datetime
 
+if not os.path.exists("response_data.json"):
+    with open("response_data.json", "w") as f:
+        f.write("[]")
+
 DATA_FILE = 'data.json'
 
 # Add this function to your existing monitor.py file
+def safe_load_json(file):
+    try:
+        return json.load(file)
+    except json.JSONDecodeError:
+        return []
+
 def load_data(filename):
     try:
         with open(filename, 'r') as file:
-            data = json.load(file)
-    except (FileNotFoundError, json.JSONDecodeError):
+            data = safe_load_json(file)
+    except FileNotFoundError:
         data = []
     return data
 
