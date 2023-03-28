@@ -59,3 +59,8 @@ body {
 .btn-danger:hover {
   background-color: darkred;
 }
+
+.btn-custom {
+  width: 200px;
+  height: 50px;
+}

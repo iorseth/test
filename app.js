@@ -22,28 +22,50 @@ function playNoteAudio(note) {
   audio.play();
 }
 
+function resetGame() {
+  message.textContent = "";
+  message.classList.remove("message-animation");
+  noteChoicesContainer.innerHTML = "";
+}
+
+function getNoteColor(note) {
+  const baseHue = 240; // Blue hue for the lowest note
+  const hueRange = 120; // Hue range from lowest to highest note
+  const noteKeys = Object.keys(pianoNotes);
+  const noteIndex = noteKeys.indexOf(note);
+  const hue = baseHue - (noteIndex / (noteKeys.length - 1)) * hueRange;
+
+  return `hsl(${hue}, 100%, 50%)`;
+}
 function displayNoteChoices(trueNote, falseNote) {
   const randomOrder = Math.random() < 0.5;
 
   const firstNote = randomOrder ? trueNote : falseNote;
   const secondNote = randomOrder ? falseNote : trueNote;
 
-  noteChoicesContainer.innerHTML = `
-      <img src="static/img/${firstNote}.png" alt="${firstNote}" class="note-choice img-thumbnail me-2" data-note="${firstNote}" style="cursor:pointer;">
-      <img src="static/img/${secondNote}.png" alt="${secondNote}" class="note-choice img-thumbnail" data-note="${secondNote}" style="cursor:pointer;">
-  `;
+noteChoicesContainer.innerHTML = `
+    <span class="note-choice font-weight-bold me-2" data-note="${firstNote}" style="cursor:pointer; color: ${getNoteColor(firstNote)};">${firstNote}</span>
+    <span class="note-choice font-weight-bold" data-note="${secondNote}" style="cursor:pointer; color: ${getNoteColor(secondNote)};">${secondNote}</span>
+`;
+
+
 
   const noteChoices = document.querySelectorAll(".note-choice");
   noteChoices.forEach((choice) => {
     choice.addEventListener("click", (e) => {
+      if (e.target.classList.contains("disabled")) {
+        return;
+      }
+
       const selectedNote = e.target.dataset.note;
       playNoteAudio(selectedNote);
 
       setTimeout(() => {
-        const noteAnimation = document.createElement("div");
-        noteAnimation.className = "note-animation";
-        noteAnimation.textContent = selectedNote;
-        document.body.appendChild(noteAnimation);
+         const noteAnimation = document.createElement("div");
+         noteAnimation.className = "note-animation";
+         noteAnimation.textContent = selectedNote;
+         noteAnimation.style.color = getNoteColor(selectedNote);
+         document.body.appendChild(noteAnimation);
 
         setTimeout(() => {
           noteAnimation.remove();
@@ -54,6 +76,11 @@ function displayNoteChoices(trueNote, falseNote) {
             message.textContent = `Incorrect! You chose ${selectedNote}.`;
           }
           message.classList.add("message-animation");
+
+          // Disable the note choices
+          noteChoices.forEach((choice) => {
+            choice.classList.add("disabled");
+          });
         }, 2000);
       }, 1000);
     });
@@ -61,16 +88,20 @@ function displayNoteChoices(trueNote, falseNote) {
 }
 
 playRandomNote.addEventListener("click", () => {
-  const trueNote = getRandomNote();
-  let falseNote;
-  do {
-    falseNote = getRandomNote();
-  } while (trueNote === falseNote);
+  setTimeout(() => {
+    resetGame();
 
-  playNoteAudio(trueNote);
-  currentNote = trueNote;
-  replayNote.style.display = "inline-block";
-  displayNoteChoices(trueNote, falseNote);
+    const trueNote = getRandomNote();
+    let falseNote;
+    do {
+      falseNote = getRandomNote();
+    } while (trueNote === falseNote);
+
+    playNoteAudio(trueNote);
+    currentNote = trueNote;
+    replayNote.style.display = "inline-block";
+    displayNoteChoices(trueNote, falseNote);
+  }, message.classList.contains("message-animation") ? 500 : 0);
 });
 
 replayNote.addEventListener("click", () => {
