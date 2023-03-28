@@ -6,7 +6,6 @@ const pianoNotes = {
 };
 
 const playRandomNote = document.getElementById("playRandomNote");
-const replayNote = document.getElementById("replayNote");
 const noteChoicesContainer = document.getElementById("noteChoicesContainer");
 const message = document.getElementById("message");
 
@@ -70,13 +69,16 @@ noteChoicesContainer.innerHTML = `
         setTimeout(() => {
           noteAnimation.remove();
 
-          if (selectedNote === trueNote) {
-            message.textContent = `Correct! This is a ${trueNote}.`;
-          } else {
-            message.textContent = `Incorrect! You chose ${selectedNote}.`;
-          }
-          message.classList.add("message-animation");
-
+         const noteColor = getNoteColor(selectedNote);
+         const coloredNote = `<span style="color: ${noteColor}">${selectedNote}</span>`;
+         
+         if (selectedNote === currentNote) {
+           playNoteAudio(selectedNote);
+           message.innerHTML = `Correct! This is a ${coloredNote}`;
+         } else {
+           playNoteAudio(selectedNote);
+           message.innerHTML = `Incorrect. This is a ${coloredNote}`;
+         }
           // Disable the note choices
           noteChoices.forEach((choice) => {
             choice.classList.add("disabled");
@@ -99,14 +101,8 @@ playRandomNote.addEventListener("click", () => {
 
     playNoteAudio(trueNote);
     currentNote = trueNote;
-    replayNote.style.display = "inline-block";
     displayNoteChoices(trueNote, falseNote);
   }, message.classList.contains("message-animation") ? 500 : 0);
 });
 
-replayNote.addEventListener("click", () => {
-  if (currentNote) {
-    playNoteAudio(currentNote);
-  }
-});
 
