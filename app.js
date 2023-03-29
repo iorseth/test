@@ -33,8 +33,8 @@ function resetGame() {
 }
 
 function getNoteColor(note) {
-  const baseHue = 240; // Blue hue for the lowest note
-  const hueRange = 120; // Hue range from lowest to highest note
+  const baseHue = 0; // Blue hue for the lowest note
+  const hueRange = 6000; // Hue range from lowest to highest note
   const noteKeys = Object.keys(pianoNotes);
   const noteIndex = noteKeys.indexOf(note);
   const hue = baseHue - (noteIndex / (noteKeys.length - 1)) * hueRange;
@@ -82,8 +82,12 @@ function displayNoteChoices(trueNote, falseNote) {
            message.innerHTML = `Correct! This is a ${coloredNote}`;
          } else {
            playNoteAudio(selectedNote);
-           message.innerHTML = `Incorrect. This is a ${coloredNote}`;
-         }
+           message.innerHTML = `Incorrect. You Chose ${coloredNote}`;
+           setTimeout(() => {
+    	   	message.innerHTML = `The right note was ${currentNote}`;
+    		playNoteAudio(currentNote);
+  	   }, 2000);
+          }
           // Disable the note choices
           noteChoices.forEach((choice) => {
             choice.classList.add("disabled");
