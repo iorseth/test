@@ -14,6 +14,7 @@ const playRandomNote = document.getElementById("playRandomNote");
 const noteChoicesContainer = document.getElementById("noteChoicesContainer");
 const message = document.getElementById("message");
 
+
 let currentNote = null;
 
 function getRandomNote() {
@@ -76,6 +77,10 @@ function displayNoteChoices(trueNote, falseNote) {
 
          const noteColor = getNoteColor(selectedNote);
          const coloredNote = `<span style="color: ${noteColor}">${selectedNote}</span>`;
+         const coloredCurrentNote = currentNote.replace(
+           noteRegex,
+           `<span style="color: ${noteColors[currentNote]}">$1</span>`
+         );
          
          if (selectedNote === currentNote) {
            playNoteAudio(selectedNote);
@@ -83,6 +88,13 @@ function displayNoteChoices(trueNote, falseNote) {
          } else {
            playNoteAudio(selectedNote);
            message.innerHTML = `Incorrect. You Chose ${coloredNote}`;
+           setTimeout(() => {
+  	      const secondMessage = document.createElement('p');
+              secondMessage.innerHTML = `The right note was ${coloredCurrentNote}`;
+              message.appendChild(secondMessage);
+              playNoteAudio(currentNote);
+           }, 2000);
+
            setTimeout(() => {
     	   	message.innerHTML = `The right note was ${currentNote}`;
     		playNoteAudio(currentNote);
