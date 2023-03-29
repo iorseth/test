@@ -41,7 +41,7 @@ function displayNoteOptions() {
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
 async function playNote(note) {
-  const url = `path/to/your/mp3/files/${note}.mp3`; // Replace with the path to your MP3 files
+  const url = `assets/songs/${note}.mp3`; // Replace with the path to your MP3 files
   const response = await fetch(url);
   const arrayBuffer = await response.arrayBuffer();
   const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
