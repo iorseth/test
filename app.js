@@ -1,22 +1,34 @@
 const playRandomNoteBtn = document.getElementById('playRandomNote');
+const replayNoteBtn = document.getElementById('replayNote');
 const optionsDiv = document.getElementById('options');
 const resultDiv = document.getElementById('result');
+const noteCountInput = document.getElementById('noteCount');
+const noteCountValueLabel = document.getElementById('noteCountValue');
 
 let correctNote;
-let incorrectNote;
 
 function generateRandomNotes() {
   const notes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4'];
+  const noteOptions = [];
   correctNote = notes[Math.floor(Math.random() * notes.length)];
-  do {
-    incorrectNote = notes[Math.floor(Math.random() * notes.length)];
-  } while (incorrectNote === correctNote);
+  noteOptions.push(correctNote);
+
+  while (noteOptions.length < noteCountInput.value) {
+    const randomNote = notes[Math.floor(Math.random() * notes.length)];
+    if (!noteOptions.includes(randomNote)) {
+      noteOptions.push(randomNote);
+    }
+  }
+
+  return noteOptions;
 }
 
 function displayNoteOptions() {
   optionsDiv.innerHTML = '';
 
-  const shuffledNotes = [correctNote, incorrectNote].sort(() => Math.random() - 0.5);
+  const noteOptions = generateRandomNotes();
+  const shuffledNotes = noteOptions.sort(() => Math.random() - 0.5);
+
   shuffledNotes.forEach(note => {
     const btn = document.createElement('button');
     btn.classList.add('btn', 'btn-outline-secondary', 'mx-2');
@@ -67,11 +79,20 @@ function checkAnswer(e) {
 }
 
 playRandomNoteBtn.addEventListener('click', () => {
-  generateRandomNotes();
   displayNoteOptions();
   playRandomNote();
   resultDiv.textContent = ''; // Clear the result message
 });
 
 optionsDiv.addEventListener('click', checkAnswer);
+
+// Update the label when the range slider value changes
+noteCountInput.addEventListener('input', () => {
+  noteCountValueLabel.textContent = noteCountInput.value;
+});
+
+// Replay the current note when the replay button is clicked
+replayNoteBtn.addEventListener('click', () => {
+  playRandomNote();
+});
 
