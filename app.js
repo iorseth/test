@@ -22,6 +22,17 @@ function generateRandomNotes() {
   return noteOptions;
 }
 
+function getColorForNote(note) {
+  const notes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4'];
+  const noteIndex = notes.indexOf(note);
+
+  const r = Math.floor(255 * (noteIndex / (notes.length - 1)));
+  const g = 0;
+  const b = Math.floor(255 * (1 - noteIndex / (notes.length - 1)));
+
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
 function displayNoteOptions() {
   optionsDiv.innerHTML = '';
 
@@ -33,6 +44,7 @@ function displayNoteOptions() {
     btn.classList.add('btn', 'btn-outline-secondary', 'mx-2');
     btn.textContent = note;
     btn.dataset.note = note;
+    btn.style.color = getColorForNote(note);
     optionsDiv.appendChild(btn);
   });
 }
@@ -70,12 +82,24 @@ function checkAnswer(e) {
   animationDiv.style.fontWeight = 'bold';
   animationDiv.style.zIndex = 1000;
 
+  // Create a span to display the played note
+  const playedNoteSpan = document.createElement('span');
+  playedNoteSpan.textContent = userAnswer;
+  playedNoteSpan.style.color = getColorForNote(userAnswer);
+  animationDiv.appendChild(playedNoteSpan);
+
   if (userAnswer === correctNote) {
     resultMessage = 'Correct! 🎉';
-    animationDiv.textContent = '🎉';
+    const correctIcon = document.createElement('span');
+    correctIcon.textContent = '🎉';
+    correctIcon.style.marginLeft = '10px';
+    animationDiv.appendChild(correctIcon);
   } else {
     resultMessage = 'Incorrect 😞';
-    animationDiv.textContent = '😞';
+    const incorrectIcon = document.createElement('span');
+    incorrectIcon.textContent = '😞';
+    incorrectIcon.style.marginLeft = '10px';
+    animationDiv.appendChild(incorrectIcon);
   }
 
   document.body.appendChild(animationDiv);
