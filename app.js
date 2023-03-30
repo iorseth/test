@@ -3,7 +3,6 @@ const replayNoteBtn = document.getElementById('replayNote');
 const optionsDiv = document.getElementById('options');
 const resultDiv = document.getElementById('result');
 const noteCountInput = document.getElementById('noteCount');
-const noteCountValueLabel = document.getElementById('noteCountValue');
 
 let correctNote;
 
@@ -89,6 +88,26 @@ function checkAnswer(e) {
   }, 1000); // Remove the animation after 1 second (1000 ms)
 }
 
+function createNoteCountLabel() {
+  const noteCountLabelContainer = document.getElementById('noteCountLabelContainer');
+  const label = document.createElement('span');
+  label.id = 'noteCountLabel';
+  label.style.position = 'absolute';
+  noteCountLabelContainer.appendChild(label);
+ 
+  updateNoteCountLabel();
+}
+
+function updateNoteCountLabel() {
+  const label = document.getElementById('noteCountLabel');
+  label.textContent = noteCountInput.value;
+  const percentage = ((noteCountInput.value - 2) / 5) * 100;
+  label.style.left = `${percentage}%`;
+  label.style.transform = 'translateX(-50%)';
+}
+
+createNoteCountLabel();
+
 playRandomNoteBtn.addEventListener('click', () => {
   displayNoteOptions();
   playRandomNote();
@@ -99,7 +118,7 @@ optionsDiv.addEventListener('click', checkAnswer);
 
 // Update the label when the range slider value changes
 noteCountInput.addEventListener('input', () => {
-  noteCountValueLabel.textContent = noteCountInput.value;
+  updateNoteCountLabel();
 });
 
 // Replay the current note when the replay button is clicked
