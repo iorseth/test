@@ -3,8 +3,13 @@ const replayNoteBtn = document.getElementById('replayNote');
 const optionsDiv = document.getElementById('options');
 const resultDiv = document.getElementById('result');
 const noteCountInput = document.getElementById('noteCount');
+const successRateProgressBar = document.getElementById('successRateProgressBar');
+const toggleBackgroundMusicBtn = document.getElementById('toggleBackgroundMusic');
+const backgroundMusic = document.getElementById('backgroundMusic');
 
 let correctNote;
+let attempts = 0;
+let successes = 0;
 
 function generateRandomNotes() {
   const notes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4'];
@@ -39,12 +44,22 @@ function displayNoteOptions() {
   const noteOptions = generateRandomNotes();
   const shuffledNotes = noteOptions.sort(() => Math.random() - 0.5);
 
-  shuffledNotes.forEach(note => {
+  shuffledNotes.forEach((note, index) => {
     const btn = document.createElement('button');
-    btn.classList.add('btn', 'btn-outline-secondary', 'mx-2');
+    btn.classList.add('btn', 'btn-outline-secondary', 'mx-2', 'animate__animated');
     btn.textContent = note;
     btn.dataset.note = note;
     btn.style.color = getColorForNote(note);
+
+    // Add animations
+    setTimeout(() => {
+      btn.classList.add('animate__fadeInUp');
+    }, index * 100);
+
+    btn.addEventListener('animationend', () => {
+      btn.classList.remove('animate__fadeInUp');
+    });
+
     optionsDiv.appendChild(btn);
   });
 }
@@ -82,14 +97,16 @@ function checkAnswer(e) {
   animationDiv.style.fontWeight = 'bold';
   animationDiv.style.zIndex = 1000;
 
-  // Create a span to display the played note
   const playedNoteSpan = document.createElement('span');
   playedNoteSpan.textContent = userAnswer;
   playedNoteSpan.style.color = getColorForNote(userAnswer);
   animationDiv.appendChild(playedNoteSpan);
 
+  attempts++;
+
   if (userAnswer === correctNote) {
     resultMessage = 'Correct! 🎉';
+    successes++;
     const correctIcon = document.createElement('span');
     correctIcon.textContent = '🎉';
     correctIcon.style.marginLeft = '10px';
@@ -101,6 +118,8 @@ function checkAnswer(e) {
     incorrectIcon.style.marginLeft = '10px';
     animationDiv.appendChild(incorrectIcon);
   }
+
+  updateSuccessRate();
 
   document.body.appendChild(animationDiv);
 
@@ -118,7 +137,7 @@ function createNoteCountLabel() {
   label.id = 'noteCountLabel';
   label.style.position = 'absolute';
   noteCountLabelContainer.appendChild(label);
- 
+
   updateNoteCountLabel();
 }
 
@@ -128,6 +147,22 @@ function updateNoteCountLabel() {
   const percentage = ((noteCountInput.value - 2) / 5) * 100;
   label.style.left = `${percentage}%`;
   label.style.transform = 'translateX(-50%)';
+}
+
+function updateSuccessRate() {
+  const successRate = Math.round((successes / attempts) * 100);
+  successRateProgressBar.style.width = `${successRate}%`;
+  successRateProgressBar.textContent = `${successRate}%`;
+}
+
+function toggleBackgroundMusic() {
+  if (backgroundMusic.paused) {
+    backgroundMusic.play();
+    toggleBackgroundMusicBtn.textContent = 'Pause Background Music';
+  } else {
+    backgroundMusic.pause();
+    toggleBackgroundMusicBtn.textContent = 'Play Background Music';
+  }
 }
 
 createNoteCountLabel();
@@ -140,13 +175,15 @@ playRandomNoteBtn.addEventListener('click', () => {
 
 optionsDiv.addEventListener('click', checkAnswer);
 
-// Update the label when the range slider value changes
 noteCountInput.addEventListener('input', () => {
   updateNoteCountLabel();
 });
 
-// Replay the current note when the replay button is clicked
 replayNoteBtn.addEventListener('click', () => {
   playRandomNote();
+});
+
+toggleBackgroundMusicBtn.addEventListener('click', () => {
+  toggleBackgroundMusic();
 });
 
