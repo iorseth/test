@@ -3,7 +3,6 @@ const replayNoteBtn = document.getElementById('replayNote');
 const optionsDiv = document.getElementById('options');
 const resultDiv = document.getElementById('result');
 const noteCountInput = document.getElementById('noteCount');
-const successRateProgressBar = document.getElementById('successRateProgressBar');
 const backgroundMusic = document.getElementById('backgroundMusic');
 
 let correctNote;
@@ -146,12 +145,6 @@ function updateNoteCountLabel() {
   const percentage = ((noteCountInput.value - 2) / 5) * 100;
   label.style.left = `${percentage}%`;
   label.style.transform = 'translateX(-50%)';
-}
-
-function updateSuccessRate() {
-  const successRate = Math.round((successes / attempts) * 100);
-  successRateProgressBar.style.width = `${successRate}%`;
-  successRateProgressBar.textContent = `${successRate}%`;
 }
 
 createNoteCountLabel();
