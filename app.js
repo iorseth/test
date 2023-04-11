@@ -4,7 +4,6 @@ const optionsDiv = document.getElementById('options');
 const resultDiv = document.getElementById('result');
 const noteCountInput = document.getElementById('noteCount');
 const successRateProgressBar = document.getElementById('successRateProgressBar');
-const toggleBackgroundMusicBtn = document.getElementById('toggleBackgroundMusic');
 const backgroundMusic = document.getElementById('backgroundMusic');
 
 let correctNote;
@@ -155,16 +154,6 @@ function updateSuccessRate() {
   successRateProgressBar.textContent = `${successRate}%`;
 }
 
-function toggleBackgroundMusic() {
-  if (backgroundMusic.paused) {
-    backgroundMusic.play();
-    toggleBackgroundMusicBtn.textContent = 'Pause Background Music';
-  } else {
-    backgroundMusic.pause();
-    toggleBackgroundMusicBtn.textContent = 'Play Background Music';
-  }
-}
-
 createNoteCountLabel();
 
 playRandomNoteBtn.addEventListener('click', () => {
@@ -181,9 +170,5 @@ noteCountInput.addEventListener('input', () => {
 
 replayNoteBtn.addEventListener('click', () => {
   playRandomNote();
-});
-
-toggleBackgroundMusicBtn.addEventListener('click', () => {
-  toggleBackgroundMusic();
 });
 
