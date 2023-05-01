@@ -294,5 +294,13 @@ html, body {
   .btn-language {
     font-size: 18px;
   }
+  .app-logo-link {
+    top: 5px;
+    left: 5px;
+  }
+  .app-logo {
+    width: 50px;
+  }
+}
 }
 
