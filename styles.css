@@ -200,16 +200,17 @@ html, body {
 }
 .app-logo-link {
   position: fixed;
-  top: 10px; /* adjust the position as needed */
-  left: 10px; /* adjust the position as needed */
+  right: 10px; /* Change to right */
+  bottom: 10px; /* Change to bottom */
   z-index: 100;
+  width: 200px;
 }
 
 .app-logo {
-  width: 200px; 
+  width: 100%;
+  max-width: 50px; /* Add max-width property to limit the width */
   height: auto;
 }
-
 #appTitle {
   font-family: 'Lobster', cursive;
   font-size: 20px; /* Change the font size to a smaller value */
@@ -320,7 +321,5 @@ html, body {
 }
 
   .app-logo {
-  width: 100%;
-  height: auto;
-}
-
+    max-width: 30px; /* Adjust the max-width for mobile devices */
+  }
