@@ -186,7 +186,7 @@ body {
 @media screen and (max-width: 768px) {
 
   .note-text {
-    font-size: 36px;
+    font-size: 10px;
   }
   .container {
     padding: 1rem;
@@ -223,7 +223,7 @@ body {
 }
 @media screen and (max-width: 480px) {
   .note-text {
-    font-size: 24px;
+    font-size: 10px;
   }
   .container {
     padding: 0.5rem;
