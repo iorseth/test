@@ -268,8 +268,11 @@ html, body {
     flex-direction: column;
     justify-content: center;
   }
-  .container {
+  .container,
+  .container-fluid {
     width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
   }
   #appTitle {
     font-size: 10px;
@@ -290,3 +293,4 @@ html, body {
     font-size: 18px;
   }
 }
+
