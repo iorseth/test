@@ -187,6 +187,7 @@ body {
   margin-right: 5px;
 }
 
+
 @media screen and (max-width: 768px) {
   .container {
     max-width: 100%;
@@ -198,7 +199,7 @@ body {
   }
 
   .title-logo {
-    width: 300px;
+    width: 80%;
     margin-top: 15px;
   }
 
@@ -216,8 +217,11 @@ body {
   .button-container {
     flex-wrap: wrap;
   }
-}
 
+  .card {
+    padding: 10px;
+  }
+}
 @media screen and (max-width: 480px) {
   .container {
     padding: 0.5rem;
@@ -233,5 +237,8 @@ body {
   .app-logo {
     width: 120px;
   }
-}
 
+  .card {
+    padding: 5px;
+  }
+}
