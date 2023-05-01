@@ -1,9 +1,8 @@
 body {
   font-family: 'Poppins', sans-serif;
-  /* Subtle gradient background */
   background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   background-blend-mode: multiply;
-  height: 100vh;
+  min-height: 100vh; /* Change this line */
   margin: 0;
   display: flex;
   justify-content: center;
@@ -12,10 +11,10 @@ body {
   overflow-x: hidden;
 }
 
+/* Remove the 'height' property from this selector */
 html, body {
   max-width: 100%;
   overflow-x: hidden;
-  height: 100%;
   overflow-y: auto;
 }
 
@@ -311,3 +310,17 @@ html, body {
   .buttons {
     margin-top: 10px;
   }
+
+  .app-logo-link {
+  position: fixed;
+  top: 10px; /* adjust the position as needed */
+  left: 10px; /* adjust the position as needed */
+  z-index: 100;
+  width: 200px; /* Move this line here */
+}
+
+  .app-logo {
+  width: 100%;
+  height: auto;
+}
+
