@@ -198,19 +198,6 @@ html, body {
   gap: 15px;
   margin-bottom: 20px;
 }
-.app-logo-link {
-  position: fixed;
-  right: 10px; /* Change to right */
-  bottom: 10px; /* Change to bottom */
-  z-index: 100;
-  width: 200px;
-}
-
-.app-logo {
-  width: 100%;
-  max-width: 50px; /* Add max-width property to limit the width */
-  height: auto;
-}
 #appTitle {
   font-family: 'Lobster', cursive;
   font-size: 20px; /* Change the font size to a smaller value */
@@ -310,16 +297,4 @@ html, body {
 
   .buttons {
     margin-top: 10px;
-  }
-
-  .app-logo-link {
-  position: fixed;
-  top: 10px; /* adjust the position as needed */
-  left: 10px; /* adjust the position as needed */
-  z-index: 100;
-  width: 200px; /* Move this line here */
-}
-
-  .app-logo {
-    max-width: 30px; /* Adjust the max-width for mobile devices */
   }
