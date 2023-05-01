@@ -15,6 +15,7 @@ body {
   max-width: 500px;
   margin: 0 auto;
   text-align: center;
+  padding: 15px;
 }
 
 .card-container {
@@ -215,7 +216,8 @@ body {
 }
 
 .title-logo {
-  width: 550px; /* Adjust the width as needed */
+  width: 100%;
+  max-width: 550px;
   height: auto;
 }
 
@@ -253,3 +255,26 @@ body {
   margin-right: 5px;
 }
 
+@media (max-width: 767px) {
+  .container {
+    width: 100%;
+  }
+  #appTitle {
+    font-size: 10px;
+  }
+
+  .card {
+    width: 80%; /* Reduce card width */
+    margin-left: auto; /* Center card horizontally */
+    margin-right: auto; /* Center card horizontally */
+    height: 150px;
+  }
+  .btn {
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+  }
+  .btn-language {
+    font-size: 18px;
+  }
+}
