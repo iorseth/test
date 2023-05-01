@@ -270,14 +270,17 @@ html, body {
     flex-direction: column;
     justify-content: center;
   }
-  .container,
-  .container-fluid {
+  .container {
     width: 100%;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 0 15px; /* Add padding to the sides */
   }
   #appTitle {
     font-size: 10px;
+    margin-bottom: 0; /* Reduce the margin-bottom of the app title */
+  }
+
+  .title-logo-container {
+    margin-bottom: 5px; /* Reduce the margin-bottom of the title logo container */
   }
 
   .card {
@@ -294,13 +297,17 @@ html, body {
   .btn-language {
     font-size: 18px;
   }
-  .app-logo-link {
-    top: 5px;
-    left: 5px;
-  }
-  .app-logo {
-    width: 50px;
-  }
-}
-}
 
+  /* Add the following styles */
+  .button-container {
+    margin-bottom: 10px;
+  }
+
+  .card-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .buttons {
+    margin-top: 10px;
+  }
