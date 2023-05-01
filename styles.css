@@ -157,7 +157,7 @@ body {
 }
 
 .title-logo {
-  width: 550px;
+  width: 200px;
   height: auto;
 }
 
@@ -186,7 +186,7 @@ body {
 @media screen and (max-width: 768px) {
 
   .note-text {
-    font-size: 10px;
+    font-size: 24px;
   }
   .container {
     padding: 1rem;
@@ -220,10 +220,14 @@ body {
     height: auto;
     font-size: 18px;
   }
+
+  .title-logo {
+    width: 60%; /* Adjust the width for medium screens */
+  }
 }
 @media screen and (max-width: 480px) {
   .note-text {
-    font-size: 10px;
+    font-size: 18px;
   }
   .container {
     padding: 0.5rem;
@@ -244,5 +248,8 @@ body {
     height: auto;
     font-size: 16px;
     padding: 15px;
+  }
+  .title-logo {
+    width: 50%; /* Adjust the width for small screens */
   }
 }
