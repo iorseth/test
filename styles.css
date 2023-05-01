@@ -1,6 +1,5 @@
 body {
   font-family: 'Poppins', sans-serif;
-  /* Subtle gradient background */
   background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   background-blend-mode: multiply;
   height: 100vh;
@@ -10,11 +9,11 @@ body {
   align-items: center;
 }
 
-
 .container {
   max-width: 500px;
   margin: 0 auto;
   text-align: center;
+  padding: 1rem;
 }
 
 .card-container {
@@ -32,9 +31,7 @@ body {
   text-align: center;
   color: #2c3e50;
   font-weight: 100;
-  /* Add gradient background */
   background: linear-gradient(135deg, #FFFFFF 0%, #f0f2f5 100%);
-  /* Add subtle box shadow */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.5s ease;
   transform-style: preserve-3d;
@@ -47,9 +44,7 @@ body {
 }
 
 .card:hover {
-  /* Add a slightly darker box shadow on hover */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  /* Add a subtle scaling effect on hover */
   transform: scale(1.05);
 }
 
@@ -143,11 +138,11 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
   border: none;
-  border-radius: 50%; /* Change the border-radius value */
+  border-radius: 50%;
   font-size: 18px;
-  width: 80px; /* Add width and height to make a perfect circle */
+  width: 80px;
   height: 80px;
-  line-height: 80px; /* Set line-height equal to height to center the text vertically */
+  line-height: 80px;
   cursor: pointer;
   text-transform: uppercase;
   font-weight: bold;
@@ -175,9 +170,9 @@ body {
   background-color: rgba(255, 255, 255, 0.9);
   display: none;
 }
+
 .language-dropdown .btn {
   font-size: 24px;
-  /* Add any other styles to match the music note button */
 }
 
 .btn-language {
@@ -190,21 +185,22 @@ body {
   gap: 15px;
   margin-bottom: 20px;
 }
+
 .app-logo-link {
   position: fixed;
-  top: 10px; /* adjust the position as needed */
-  left: 10px; /* adjust the position as needed */
+  top: 10px;
+  left: 10px;
   z-index: 100;
 }
 
 .app-logo {
-  width: 200px; 
+  width: 200px;
   height: auto;
 }
 
 #appTitle {
   font-family: 'Lobster', cursive;
-  font-size: 25px; /* Change the font size to a smaller value */
+  font-size: 25px;
 }
 
 .title-logo-container {
@@ -215,36 +211,36 @@ body {
 }
 
 .title-logo {
-  width: 550px; /* Adjust the width as needed */
+  width: 550px;
   height: auto;
 }
 
 .note-color-C {
-  color: #1a237e; /* Darkest (Blue) */
+  color: #1a237e;
 }
 
 .note-color-D {
-  color: #0d47a1; /* Dark Blue */
+  color: #0d47a1;
 }
 
 .note-color-E {
-  color: #2196f3; /* Light Blue */
+  color: #2196f3;
 }
 
 .note-color-F {
-  color: #4caf50; /* Green */
+  color: #4caf50;
 }
 
 .note-color-G {
-  color: #ffeb3b; /* Yellow */
+  color: #ffeb3b;
 }
 
 .note-color-A {
-  color: #f57c00; /* Orange */
+  color: #f57c00;
 }
 
 .note-color-B {
-  color: #e65100; /* Lightest (Red) */
+  color: #e65100;
 }
 
 .language-dropdown .dropdown-item img {
@@ -252,4 +248,91 @@ body {
   height: auto;
   margin-right: 5px;
 }
+
+@media screen and (max-width: 768px) {
+  .container {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .card {
+    height: auto;
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+
+  .btn {
+    margin: 0.5rem 0;
+  }
+
+  #appTitle {
+    font-size: 20px;
+  }
+
+  .title-logo-container {
+    flex-direction: column;
+  }
+
+  .title-logo {
+    width: 300px;
+    margin-top: 15px;
+  }
+
+  .note-text {
+    font-size: 36px;
+  }
+
+  .btn {
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+  }
+
+  .btn-try-again {
+    width: 64px;
+    height: 64px;
+    line-height: 64px;
+    font-size: 16px;
+  }
+
+  .app-logo {
+    width: 150px;
+  }
+
+  .button-container {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 0.5rem;
+  }
+
+  .card {
+    padding: 0.5rem;
+  }
+
+  .btn {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .btn-try-again {
+    width: 56px;
+    height: 56px;
+    line-height: 56px;
+    font-size: 14px;
+  }
+
+  .app-logo {
+    width: 120px;
+  }
+}
+ 
 
