@@ -10,6 +10,12 @@ body {
   align-items: center;
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  height: 100%;
+  overflow-y: auto;
+}
 
 .container {
   max-width: 500px;
@@ -256,6 +262,12 @@ body {
 }
 
 @media (max-width: 767px) {
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
   .container {
     width: 100%;
   }
