@@ -21,23 +21,6 @@
             <img src="images/swipe.png" alt="Your Title Logo" class="title-logo">
         </div>
         <h1 id="appTitle" class="text-center my-5">Music Note Learning App</h1>
-        <!-- Add a button container div -->
-        <div class="button-container">
-            <!-- Language dropdown -->
-            <div class="dropdown language-dropdown">
-                <button class="btn btn-secondary dropdown-toggle btn-language" type="button" id="languageMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-globe"></i>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="languageMenuButton">
-                    <button class="dropdown-item" data-lang="en"><img src="images/flags/en.svg" alt="English Flag"></button>
-                    <button class="dropdown-item" data-lang="fr"><img src="images/flags/fr.svg" alt="French Flag"></button>
-                    <button class="dropdown-item" data-lang="es"><img src="images/flags/es.svg" alt="Spanish Flag"></button>
-                </div>
-            </div>
-
-            <!-- Music note button -->
-            <button class="btn btn-info btn-lg" onclick="replayNote()">&#x1F3B5;</button>
-        </div>
         <div class="card-container">
             <div class="card">
                 <div class="card-body">
@@ -46,10 +29,22 @@
                 </div>
             </div>
             <div class="buttons">
-                <!-- Update the button with the btn-danger class -->
                 <button class="btn btn-danger btn-lg" onclick="onSwipeLeft()">
                     <span style="font-size: 1.5rem;">&times;</span>
                 </button>
+                <!-- Language dropdown -->
+                <div class="dropdown language-dropdown">
+                    <button class="btn btn-secondary dropdown-toggle btn-language" type="button" id="languageMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-globe"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="languageMenuButton">
+                        <button class="dropdown-item" data-lang="en"><img src="images/flags/en.svg" alt="English Flag"></button>
+                        <button class="dropdown-item" data-lang="fr"><img src="images/flags/fr.svg" alt="French Flag"></button>
+                        <button class="dropdown-item" data-lang="es"><img src="images/flags/es.svg" alt="Spanish Flag"></button>
+                    </div>
+                </div>
+                <!-- Music note button -->
+                <button class="btn btn-info btn-lg" onclick="replayNote()">&#x1F3B5;</button>
                 <button class="btn btn-success btn-lg" onclick="onSwipeRight()">&#128077;</button>
             </div>
         </div>
