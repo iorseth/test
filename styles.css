@@ -2,7 +2,7 @@ body {
   font-family: 'Poppins', sans-serif;
   background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   background-blend-mode: multiply;
-  min-height: 100vh; /* Change this line */
+  min-height: 100vh;
   margin: 0;
   display: flex;
   justify-content: center;
@@ -11,7 +11,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Remove the 'height' property from this selector */
 html, body {
   max-width: 100%;
   overflow-x: hidden;
@@ -40,9 +39,7 @@ html, body {
   text-align: center;
   color: #2c3e50;
   font-weight: 100;
-  /* Add gradient background */
   background: linear-gradient(135deg, #FFFFFF 0%, #f0f2f5 100%);
-  /* Add subtle box shadow */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.5s ease;
   transform-style: preserve-3d;
@@ -55,9 +52,7 @@ html, body {
 }
 
 .card:hover {
-  /* Add a slightly darker box shadow on hover */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  /* Add a subtle scaling effect on hover */
   transform: scale(1.05);
 }
 
@@ -84,21 +79,12 @@ html, body {
   font-size: 24px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
+  color: white;
 }
 
 .btn:hover {
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
   transform: translateY(-2px);
-}
-
-.btn {
-  border-radius: 50%;
-  width: 64px;
-  height: 64px;
-  font-size: 24px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-  color: white;
 }
 
 .btn-success {
@@ -107,11 +93,6 @@ html, body {
 
 .btn-danger {
   background-color: #e74c3c;
-}
-
-.btn:hover {
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
-  transform: translateY(-2px);
 }
 
 .btn-success:hover {
@@ -141,21 +122,20 @@ html, body {
   max-width: 100%;
   height: auto;
   display: none;
-  margin-top: 20px;
+  margin: 20px auto 0; /* Center the image horizontally */
   border-radius: 10px;
 }
-
 .btn-try-again {
-  background-color: #3498db;
+  background-color: #17a2b8;
   color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
   border: none;
-  border-radius: 50%; /* Change the border-radius value */
+  border-radius: 50%;
   font-size: 18px;
-  width: 80px; /* Add width and height to make a perfect circle */
+  width: 80px;
   height: 80px;
-  line-height: 80px; /* Set line-height equal to height to center the text vertically */
+  line-height: 80px;
   cursor: pointer;
   text-transform: uppercase;
   font-weight: bold;
@@ -183,9 +163,9 @@ html, body {
   background-color: rgba(255, 255, 255, 0.9);
   display: none;
 }
+
 .language-dropdown .btn {
   font-size: 24px;
-  /* Add any other styles to match the music note button */
 }
 
 .btn-language {
@@ -198,9 +178,10 @@ html, body {
   gap: 15px;
   margin-bottom: 20px;
 }
+
 #appTitle {
   font-family: 'Lobster', cursive;
-  font-size: 20px; /* Change the font size to a smaller value */
+  font-size: 20px;
 }
 
 .title-logo-container {
@@ -217,31 +198,31 @@ html, body {
 }
 
 .note-color-C {
-  color: #1a237e; /* Darkest (Blue) */
+  color: #1a237e;
 }
 
 .note-color-D {
-  color: #0d47a1; /* Dark Blue */
+  color: #0d47a1;
 }
 
 .note-color-E {
-  color: #2196f3; /* Light Blue */
+  color: #2196f3;
 }
 
 .note-color-F {
-  color: #4caf50; /* Green */
+  color: #4caf50;
 }
 
 .note-color-G {
-  color: #ffeb3b; /* Yellow */
+  color: #ffeb3b;
 }
 
 .note-color-A {
-  color: #f57c00; /* Orange */
+  color: #f57c00;
 }
 
 .note-color-B {
-  color: #e65100; /* Lightest (Red) */
+  color: #e65100;
 }
 
 .language-dropdown .dropdown-item img {
@@ -259,21 +240,21 @@ html, body {
   }
   .container {
     width: 100%;
-    padding: 0 15px; /* Add padding to the sides */
+    padding: 0 15px;
   }
   #appTitle {
     font-size: 10px;
-    margin-bottom: 0; /* Reduce the margin-bottom of the app title */
+    margin-bottom: 0;
   }
 
   .title-logo-container {
-    margin-bottom: 5px; /* Reduce the margin-bottom of the title logo container */
+    margin-bottom: 5px;
   }
 
   .card {
-    width: 80%; /* Reduce card width */
-    margin-left: auto; /* Center card horizontally */
-    margin-right: auto; /* Center card horizontally */
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
     height: 150px;
   }
   .btn {
@@ -285,7 +266,6 @@ html, body {
     font-size: 18px;
   }
 
-  /* Add the following styles */
   .button-container {
     margin-bottom: 10px;
   }
@@ -298,3 +278,25 @@ html, body {
   .buttons {
     margin-top: 10px;
   }
+
+  .note-text {
+    font-size: 36px;
+  }
+
+  .card-title {
+    font-size: 18px;
+  }
+
+  .btn-try-again {
+    width: 64px;
+    height: 64px;
+    line-height: 64px;
+    font-size: 16px;
+  }
+
+  #resultImage {
+    margin-bottom: 10px;
+  }
+
+}
+

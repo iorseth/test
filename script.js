@@ -274,10 +274,14 @@ function displayChart() {
   resultMessage.text(`Your score is ${correctAnswers} out of 10`);
   $('.container').append(resultMessage);
 
-  const retryButton = $('<button class="btn btn-try-again btn-lg mt-4">Retry</button>'); // Change "Try Again" to "Retry"
+  const retryButton = $('<button class="btn btn-try-again btn-lg mt-4">&#x21BA;</button>');
   retryButton.click(resetGame);
   $('.container').append(retryButton);
   $('#resultImage').show();
+  $('#resultImage').css({
+  width: '50%', // Adjust the percentage to resize the image
+  height: 'auto'
+});
 }
 
 function onPan(event) {
