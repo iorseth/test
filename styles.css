@@ -172,6 +172,14 @@ html, body {
   background-color: #17a2b8;
 }
 
+.btn-language::after {
+  display: none;
+}
+
+.btn-info {
+  color: white;
+}
+
 .button-container {
   display: flex;
   justify-content: center;
