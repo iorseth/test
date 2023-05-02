@@ -1,7 +1,7 @@
 {
   "title": "Guess if the note played is on the card",
-  "correct": "Correct!",
-  "incorrect": "Incorrect!",
+  "correct": "✅",
+  "incorrect": "😞",
   "noteNames": ["C", "D", "E", "F", "G", "A", "B"],
   "currentNote": "The current note was:"
 

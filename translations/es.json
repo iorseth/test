@@ -1,7 +1,7 @@
 {
   "title": "Adivina si la nota tocada está en la tarjeta",
-  "correct": "¡Correcto!",
-  "incorrect": "¡Incorrecto!",
+  "correct": "✅",
+  "incorrect": "😞",
   "noteNames": ["Do", "Re", "Mi", "Fa", "Sol", "La", "Si"],
   "currentNote": "La nota actual fue:"
 }

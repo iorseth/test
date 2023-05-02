@@ -1,8 +1,8 @@
 {
   "title": "Devinez si la note joué est sur la carte",
-  "correct": "Correct !",
-  "incorrect": "Incorrect !",
+  "correct": "✅",
+  "incorrect": "😞",
   "noteNames": ["Do", "Ré", "Mi", "Fa", "Sol", "La", "Si"],
-  "currentNote": "La note actuelle était:"
+  "currentNote": "La note est"
 }
 
