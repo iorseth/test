@@ -35,8 +35,8 @@ Promise.all([
   loadTranslations("fr"),
   loadTranslations("es") // Add this line to load Spanish translations
 ]).then(() => {
-  // Set the initial language
-  changeLanguage("en");
+  // Set the initial language based on the browser's language
+  setDefaultLanguage();
 
   // Call playRandomNote before updateCard
   playRandomNote();
@@ -186,6 +186,22 @@ function animateCard(direction) {
     card.css('transform', 'none');
     card.css('opacity', '1');
   }, 500);
+}
+
+function getBrowserLanguage() {
+  return navigator.language || navigator.userLanguage;
+}
+
+function setDefaultLanguage() {
+  const browserLanguage = getBrowserLanguage().substring(0, 2);
+
+  if (browserLanguage === "fr" || browserLanguage === "es") {
+    // Set the site language to French or Spanish, based on the browser language
+    changeLanguage(browserLanguage);
+  } else {
+    // Set the site language to English by default
+    changeLanguage("en");
+  }
 }
 
 function onSwipeLeft() {
