@@ -66,12 +66,6 @@ html, body {
   font-weight: bold;
 }
 
-.buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 16px;
-}
-
 .btn {
   border-radius: 50%;
   width: 64px;
@@ -176,8 +170,19 @@ html, body {
   display: none;
 }
 
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.dropdown.language-dropdown {
+  order: 2;
+}
+
 .btn-info {
-  color: white;
+  order: 3;
 }
 
 .button-container {
@@ -281,10 +286,6 @@ html, body {
   .card-container {
     margin-top: 20px;
     margin-bottom: 20px;
-  }
-
-  .buttons {
-    margin-top: 10px;
   }
 
   .note-text {
