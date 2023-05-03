@@ -77,7 +77,7 @@ function playRandomNote() {
 
 
 function updateCard(updateNote = true) {
-    if (!currentNote) {
+  if (!currentNote) {
     playRandomNote();
   }
 
@@ -86,8 +86,12 @@ function updateCard(updateNote = true) {
   }
 
   displayedNoteIndex = notes.findIndex(note => note.name === currentNote.name);
-
+  
+  // Randomly generate the displayed note
+  const randomOffset = Math.floor(Math.random() * 3) - 1; // Generates -1, 0, or 1
+  displayedNoteIndex = (displayedNoteIndex + randomOffset + notes.length) % notes.length;
   const displayedNote = notes[displayedNoteIndex];
+
   const lang = $('html').attr('lang');
   const translation = translations[lang];
 
