@@ -18,6 +18,7 @@ let translations = {};
 let correctMessage = "";
 let incorrectMessage = "";
 let displayedNoteIndex = 0;
+let displayedTranslatedNoteName = "";
 
 function loadTranslations(lang) {
   return new Promise((resolve, reject) => {
@@ -77,26 +78,19 @@ function playRandomNote() {
 
 
 function updateCard(updateNote = true) {
-  if (!currentNote) {
-    playRandomNote();
-  }
-
-  if (updateNote) {
-    playRandomNote();
-  }
-
-  displayedNoteIndex = notes.findIndex(note => note.name === currentNote.name);
-  
-  // Randomly generate the displayed note
-  const randomOffset = Math.floor(Math.random() * 3) - 1; // Generates -1, 0, or 1
-  displayedNoteIndex = (displayedNoteIndex + randomOffset + notes.length) % notes.length;
-  const displayedNote = notes[displayedNoteIndex];
-
   const lang = $('html').attr('lang');
   const translation = translations[lang];
 
-  // Check if translation and translation.noteNames are not undefined
+  if (updateNote) {
+    playRandomNote();
+
+    // Randomly generate the displayed note index
+    const randomOffset = Math.floor(Math.random() * 3) - 1; // Generates -1, 0, or 1
+    displayedNoteIndex = (notes.findIndex(note => note.name === currentNote.name) + randomOffset + notes.length) % notes.length;
+  }
+
   if (translation && translation.noteNames) {
+    const displayedNote = notes[displayedNoteIndex];
     const translatedNoteName = translation.noteNames[displayedNoteIndex];
 
     // Update the note color
@@ -353,6 +347,16 @@ $(".language-dropdown .dropdown-item").click(function () {
   const lang = $(this).attr("data-lang");
   changeLanguage(lang);
 });
+
+// Call playRandomNote before updateCard
+playRandomNote();
+
+// Update the displayedTranslatedNoteName variable with the initial translated note name
+const initialLang = $('html').attr('lang');
+const initialTranslation = translations[initialLang];
+displayedTranslatedNoteName = initialTranslation.noteNames[displayedNoteIndex];
+
+updateCard(false, displayedTranslatedNoteName);
 
 });
 
