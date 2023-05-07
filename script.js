@@ -11,14 +11,12 @@ const notes = [
 
 let hammer;
 let currentNote;
-let results = [];
-let totalAnswers = 0;
-let correctAnswers = 0;
 let translations = {};
 let correctMessage = "";
 let incorrectMessage = "";
 let displayedNoteIndex = 0;
 let displayedTranslatedNoteName = "";
+let lives = 3;
 
 function loadTranslations(lang) {
   return new Promise((resolve, reject) => {
@@ -41,9 +39,16 @@ Promise.all([
 
   // Call playRandomNote before updateCard
   playRandomNote();
-  updateCard();
-});
 
+  // Update the displayedTranslatedNoteName variable with the initial translated note name
+  const initialLang = $('html').attr('lang');
+  const initialTranslation = translations[initialLang];
+  displayedTranslatedNoteName = initialTranslation.noteNames[displayedNoteIndex];
+
+  // Update the card, which will also play a random note
+  updateCard(false, displayedTranslatedNoteName);
+
+});
 
 function changeLanguage(lang) {
   const translation = translations[lang];
@@ -144,13 +149,6 @@ function showMessage(messageType, animationClass, callback) {
   }, 2000);
 }
 
-function displayResults() {
-  let resultIcons = '';
-  results.forEach(result => {
-    resultIcons += `<span style="font-size: 24px; margin-right: 4px;">${result ? '&#10004;' : '&#10008;'}</span>`;
-  });
-  $('#results').html(resultIcons);
-}
 
 function getResultImage(correctAnswers) {
   if (correctAnswers <= 2) {
@@ -204,58 +202,56 @@ function setDefaultLanguage() {
 
 function onSwipeLeft() {
   const isCorrect = $('.card').data('isCorrect');
-  if (!isCorrect) {
-    correctAnswers++;
-    replayNote(); // Replay the current note
+  if (isCorrect) {
+    lives--;
+    displayLives();
+    if (lives === 0) {
+      setTimeout(displayChart, 1000);
+    } else {
+      replayNote();
+      showMessage('incorrect', "animate__shakeX", () => {
+        updateCard();
+        enableInteractions();
+      });
+    }
+  } else {
+    replayNote();
     showMessage('correct', "animate__tada", () => {
       updateCard();
       enableInteractions();
     });
-  } else {
-    replayNote(); // Replay the current note
-    showMessage('incorrect', "animate__shakeX", () => {
-      updateCard();
-      enableInteractions();
-    });
   }
-  totalAnswers++;
-  results.push(!isCorrect);
-  displayResults();
-
-  if (totalAnswers === 10) {
-    setTimeout(displayChart, 1000);
-  } else {
-    disableInteractions();
-    animateCard(-100);
-  }
+  disableInteractions();
+  animateCard(-100);
 }
 
 function onSwipeRight() {
   const isCorrect = $('.card').data('isCorrect');
   if (isCorrect) {
-    correctAnswers++;
-    replayNote(); // Replay the current note
+    replayNote();
     showMessage('correct', "animate__tada", () => {
       updateCard();
       enableInteractions();
     });
   } else {
-    replayNote(); // Replay the current note
-    showMessage('incorrect', "animate__shakeX", () => {
-      updateCard();
-      enableInteractions();
-    });
+    lives--;
+    displayLives();
+    if (lives === 0) {
+      setTimeout(displayChart, 1000);
+    } else {
+      replayNote();
+      showMessage('incorrect', "animate__shakeX", () => {
+        updateCard();
+        enableInteractions();
+      });
+    }
   }
-  totalAnswers++;
-  results.push(isCorrect);
-  displayResults();
+  disableInteractions();
+  animateCard(100);
+}
 
-  if (totalAnswers === 10) {
-    setTimeout(displayChart, 1000);
-  } else {
-    disableInteractions();
-    animateCard(100);
-  }
+function displayLives() {
+  $('#lives').text(`Lives: ${lives}`);
 }
 
 function resetGame() {
@@ -266,8 +262,10 @@ function resetGame() {
   results = [];
   totalAnswers = 0;
   correctAnswers = 0;
-  displayResults();
+  lives = 3; // Reset lives here
+  displayLives(); // Update the lives display
   updateCard();
+  enableInteractions();
 
   // Reset the card's transform and opacity
   const card = $('.card');
@@ -278,24 +276,20 @@ function resetGame() {
 
 function displayChart() {
   $('.card-container').hide();
-  const resultImageURL = getResultImage(correctAnswers);
+  const resultImageURL = getResultImage(lives);
   const resultImage = $('<img id="resultImage" src="" alt="Result image">');
   resultImage.attr('src', resultImageURL);
   $('.container').append(resultImage);
 
-  // Add a personalized message with the score
-  const resultMessage = $('<p id="resultMessage"></p>');
-  resultMessage.text(`Your score is ${correctAnswers} out of 10`);
-  $('.container').append(resultMessage);
-
+  // Remove the personalized message with the score
   const retryButton = $('<button class="btn btn-try-again btn-lg mt-4">&#x21BA;</button>');
   retryButton.click(resetGame);
   $('.container').append(retryButton);
   $('#resultImage').show();
   $('#resultImage').css({
-  width: '50%', // Adjust the percentage to resize the image
-  height: 'auto'
-});
+    width: '50%', // Adjust the percentage to resize the image
+    height: 'auto'
+  });
 }
 
 function onPan(event) {
@@ -341,6 +335,11 @@ $(document).ready(() => {
 
 
   $('#resultsChart').hide();
+
+  // Add the lives display
+  const livesElement = $('<span id="lives"></span>');
+  $('.container').prepend(livesElement);
+  displayLives();
 
 // Add event listener for the language dropdown
 $(".language-dropdown .dropdown-item").click(function () {
