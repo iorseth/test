@@ -17,6 +17,7 @@ let incorrectMessage = "";
 let displayedNoteIndex = 0;
 let displayedTranslatedNoteName = "";
 let lives = 3;
+let correctAnswersInARow = 0;
 
 function loadTranslations(lang) {
   return new Promise((resolve, reject) => {
@@ -149,6 +150,18 @@ function showMessage(messageType, animationClass, callback) {
   }, 2000);
 }
 
+function showCorrectInARowAnimation() {
+  const animationElement = document.createElement("div");
+  animationElement.id = "correctInARow";
+  animationElement.innerHTML = `${correctAnswersInARow} in a row!`;
+  animationElement.classList.add("animate__animated", "animate__heartBeat");
+  document.querySelector('.container').appendChild(animationElement);
+
+  setTimeout(() => {
+    animationElement.classList.remove("animate__animated", "animate__heartBeat");
+    document.querySelector('.container').removeChild(animationElement);
+  }, 2000);
+}
 
 function getResultImage(correctAnswers) {
   if (correctAnswers <= 2) {
@@ -203,6 +216,7 @@ function setDefaultLanguage() {
 function onSwipeLeft() {
   const isCorrect = $('.card').data('isCorrect');
   if (isCorrect) {
+    correctAnswersInARow = 0;
     lives--;
     displayLives();
     if (lives === 0) {
@@ -215,6 +229,10 @@ function onSwipeLeft() {
       });
     }
   } else {
+    correctAnswersInARow++;
+    if (correctAnswersInARow > 2) {
+      showCorrectInARowAnimation();
+    }
     replayNote();
     showMessage('correct', "animate__tada", () => {
       updateCard();
@@ -228,12 +246,17 @@ function onSwipeLeft() {
 function onSwipeRight() {
   const isCorrect = $('.card').data('isCorrect');
   if (isCorrect) {
+    correctAnswersInARow++;
+    if (correctAnswersInARow > 2) {
+      showCorrectInARowAnimation();
+    }
     replayNote();
     showMessage('correct', "animate__tada", () => {
       updateCard();
       enableInteractions();
     });
   } else {
+    correctAnswersInARow = 0;
     lives--;
     displayLives();
     if (lives === 0) {
