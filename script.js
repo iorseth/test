@@ -18,6 +18,7 @@ let displayedNoteIndex = 0;
 let displayedTranslatedNoteName = "";
 let lives = 3;
 let correctAnswersInARow = 0;
+let totalPoints = 0;
 
 function loadTranslations(lang) {
   return new Promise((resolve, reject) => {
@@ -231,6 +232,7 @@ function showCorrectInARowAnimation() {
 	    }
 	  } else {
 	    correctAnswersInARow++;
+            totalPoints += correctAnswersInARow;
 	    if (correctAnswersInARow > 1) {
       showCorrectInARowAnimation();
     }
@@ -242,12 +244,14 @@ function showCorrectInARowAnimation() {
   }
   disableInteractions();
   animateCard(-100);
+  displayPoints();
 }
 
 function onSwipeRight() {
   const isCorrect = $('.card').data('isCorrect');
   if (isCorrect) {
     correctAnswersInARow++;
+    totalPoints += correctAnswersInARow; // Add this line to update the total points
     if (correctAnswersInARow > 2) {
       showCorrectInARowAnimation();
     }
@@ -272,10 +276,15 @@ function onSwipeRight() {
   }
   disableInteractions();
   animateCard(100);
+  displayPoints();
 }
 
 function displayLives() {
   $('#lives').text(`Lives: ${lives}`);
+}
+
+function displayPoints() {
+  $('#points').text(`Points: ${totalPoints}`);
 }
 
 function resetGame() {
@@ -286,6 +295,8 @@ function resetGame() {
   results = [];
   totalAnswers = 0;
   correctAnswers = 0;
+  totalPoints = 0;
+  displayPoints();
   lives = 3; // Reset lives here
   displayLives(); // Update the lives display
   updateCard();
@@ -352,6 +363,10 @@ function onPanEnd(event) {
 $(document).ready(() => {
   const cardElement = document.querySelector('.card');
   const hammerOptions = { recognizers: [[Hammer.Pan, { direction: Hammer.DIRECTION_HORIZONTAL }]] };
+  const pointsElement = $('<span id="points"></span>');
+  $('.container').prepend(pointsElement);
+  displayPoints();
+
   hammer = new Hammer(cardElement, hammerOptions);
 
   hammer.on('pan', onPan);
