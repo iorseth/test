@@ -154,83 +154,84 @@ function showCorrectInARowAnimation() {
   const animationElement = document.createElement("div");
   animationElement.id = "correctInARow";
   animationElement.innerHTML = `${correctAnswersInARow} in a row!`;
-  animationElement.classList.add("animate__animated", "animate__heartBeat");
-  document.querySelector('.container').appendChild(animationElement);
+  animationElement.classList.add("animate__animated", "animate__scaleIn", "animate__rotateIn");
+	  animationElement.style.color = `hsl(${Math.random() * 360}, 100%, 50%)`; // Random color for the streak number
+	  document.querySelector('.container').appendChild(animationElement);
 
-  setTimeout(() => {
-    animationElement.classList.remove("animate__animated", "animate__heartBeat");
-    document.querySelector('.container').removeChild(animationElement);
-  }, 2000);
-}
+	  setTimeout(() => {
+	    animationElement.classList.remove("animate__animated", "animate__scaleIn", "animate__rotateIn");
+	    document.querySelector('.container').removeChild(animationElement);
+	  }, 2000);
+	}
 
-function getResultImage(correctAnswers) {
-  if (correctAnswers <= 2) {
-    return './images/result_0_2.png';
-  } else if (correctAnswers <= 5) {
-    return './images/result_3_5.png';
-  } else if (correctAnswers <= 8) {
-    return './images/result_6_8.png';
-  } else {
-    return './images/result_9_10.png';
-  }
-}
+	function getResultImage(correctAnswers) {
+	  if (correctAnswers <= 2) {
+	    return './images/result_0_2.png';
+	  } else if (correctAnswers <= 5) {
+	    return './images/result_3_5.png';
+	  } else if (correctAnswers <= 8) {
+	    return './images/result_6_8.png';
+	  } else {
+	    return './images/result_9_10.png';
+	  }
+	}
 
-function disableInteractions() {
-  $('.btn').prop('disabled', true);
-  hammer.get('pan').set({ enable: false });
-}
+	function disableInteractions() {
+	  $('.btn').prop('disabled', true);
+	  hammer.get('pan').set({ enable: false });
+	}
 
-function enableInteractions() {
-  $('.btn').prop('disabled', false);
-  hammer.get('pan').set({ enable: true });
-}
+	function enableInteractions() {
+	  $('.btn').prop('disabled', false);
+	  hammer.get('pan').set({ enable: true });
+	}
 
-function animateCard(direction) {
-  const card = $('.card');
-  card.css('transition', 'transform 0.5s, opacity 0.5s');
-  card.css('transform', `translateX(${direction}%) rotateY(${direction * 0.8}deg)`);
-  card.css('opacity', '0');
-  setTimeout(() => {
-    card.css('transition', 'none');
-    card.css('transform', 'none');
-    card.css('opacity', '1');
-  }, 500);
-}
+	function animateCard(direction) {
+	  const card = $('.card');
+	  card.css('transition', 'transform 0.5s, opacity 0.5s');
+	  card.css('transform', `translateX(${direction}%) rotateY(${direction * 0.8}deg)`);
+	  card.css('opacity', '0');
+	  setTimeout(() => {
+	    card.css('transition', 'none');
+	    card.css('transform', 'none');
+	    card.css('opacity', '1');
+	  }, 500);
+	}
 
-function getBrowserLanguage() {
-  return navigator.language || navigator.userLanguage;
-}
+	function getBrowserLanguage() {
+	  return navigator.language || navigator.userLanguage;
+	}
 
-function setDefaultLanguage() {
-  const browserLanguage = getBrowserLanguage().substring(0, 2);
+	function setDefaultLanguage() {
+	  const browserLanguage = getBrowserLanguage().substring(0, 2);
 
-  if (browserLanguage === "fr" || browserLanguage === "es") {
-    // Set the site language to French or Spanish, based on the browser language
-    changeLanguage(browserLanguage);
-  } else {
-    // Set the site language to English by default
-    changeLanguage("en");
-  }
-}
+	  if (browserLanguage === "fr" || browserLanguage === "es") {
+	    // Set the site language to French or Spanish, based on the browser language
+	    changeLanguage(browserLanguage);
+	  } else {
+	    // Set the site language to English by default
+	    changeLanguage("en");
+	  }
+	}
 
-function onSwipeLeft() {
-  const isCorrect = $('.card').data('isCorrect');
-  if (isCorrect) {
-    correctAnswersInARow = 0;
-    lives--;
-    displayLives();
-    if (lives === 0) {
-      setTimeout(displayChart, 1000);
-    } else {
-      replayNote();
-      showMessage('incorrect', "animate__shakeX", () => {
-        updateCard();
-        enableInteractions();
-      });
-    }
-  } else {
-    correctAnswersInARow++;
-    if (correctAnswersInARow > 2) {
+	function onSwipeLeft() {
+	  const isCorrect = $('.card').data('isCorrect');
+	  if (isCorrect) {
+	    correctAnswersInARow = 0;
+	    lives--;
+	    displayLives();
+	    if (lives === 0) {
+	      setTimeout(displayChart, 1000);
+	    } else {
+	      replayNote();
+	      showMessage('incorrect', "animate__shakeX", () => {
+		updateCard();
+		enableInteractions();
+	      });
+	    }
+	  } else {
+	    correctAnswersInARow++;
+	    if (correctAnswersInARow > 1) {
       showCorrectInARowAnimation();
     }
     replayNote();

@@ -252,12 +252,12 @@ html, body {
 
 #correctInARow {
   position: absolute;
-  top: 50%;
+  top: 10%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 24px;
+  transform: translateX(-50%);
+  font-size: 2rem;
   font-weight: bold;
-  color: #ff0000;
+  z-index: 100;
 }
 
 @media (max-width: 767px) {
