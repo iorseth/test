@@ -154,7 +154,7 @@ function showMessage(messageType, animationClass, callback) {
 function showCorrectInARowAnimation() {
   const animationElement = document.createElement("div");
   animationElement.id = "correctInARow";
-  animationElement.innerHTML = `${correctAnswersInARow} in a row!`;
+  animationElement.innerHTML = `X ${correctAnswersInARow}`;
   animationElement.classList.add("animate__animated", "animate__scaleIn", "animate__rotateIn");
 	  animationElement.style.color = `hsl(${Math.random() * 360}, 100%, 50%)`; // Random color for the streak number
 	  document.querySelector('.container').appendChild(animationElement);
@@ -280,7 +280,14 @@ function onSwipeRight() {
 }
 
 function displayLives() {
-  $('#lives').text(`Lives: ${lives}`);
+  const livesElement = $('#lives');
+  livesElement.empty(); // Clear the existing lives display
+
+  for (let i = 0; i < lives; i++) {
+    const heartIcon = $('<i class="fas fa-heart"></i>');
+    heartIcon.css({ marginRight: '4px', color: 'red' }); // Add some spacing and color to the hearts
+    livesElement.append(heartIcon);
+  }
 }
 
 function displayPoints() {
