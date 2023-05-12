@@ -291,7 +291,7 @@ function displayLives() {
 }
 
 function displayPoints() {
-  $('#points').text(`Points: ${totalPoints}`);
+  $('#points').html(`<i class="fa-solid fa-music"></i> ${totalPoints}`);
 }
 
 function resetGame() {
