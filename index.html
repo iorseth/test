@@ -22,8 +22,10 @@
         </div>
         <h1 id="appTitle" class="text-center my-5">Music Note Learning App</h1>
         <div id="results" class="results mt-4"></div>
+        <p id="quote" class="text-center"></p> <!-- New element for the quote -->
+        <div id="resultImage" class="result-image"></div>
         <div class="card-container">
-	    <div id="lives" class="mt-2"></div>
+            <div id="lives" class="mt-2"></div>
             <div class="card">
                 <div class="card-body">
                     <p class="card-text note-text">C</p>
@@ -45,7 +47,8 @@
                     </div>
                 </div>
                 <button class="btn btn-info btn-lg" onclick="replayNote()">
-                    <i class="fas fa-play"></i> <!-- Changed to Play button -->
+                    <i class="fas fa-play">
+                    </i> <!-- Changed to Play button -->
                 </button>
                 <button class="btn btn-success btn-lg" onclick="onSwipeRight()">&#128077;</button>
             </div>

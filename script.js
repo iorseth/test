@@ -20,6 +20,14 @@ let lives = 3;
 let correctAnswersInARow = 0;
 let totalPoints = 0;
 
+const quotes = [
+  "Keep practicing!",
+  "Good job!",
+  "Excellent work!",
+  "You're a music master!",
+];
+
+
 function loadTranslations(lang) {
   return new Promise((resolve, reject) => {
     $.getJSON(`./translations/${lang}.json`, (data) => {
@@ -165,17 +173,26 @@ function showCorrectInARowAnimation() {
 	  }, 2000);
 	}
 
-	function getResultImage(correctAnswers) {
-	  if (correctAnswers <= 2) {
-	    return './images/result_0_2.png';
-	  } else if (correctAnswers <= 5) {
-	    return './images/result_3_5.png';
-	  } else if (correctAnswers <= 8) {
-	    return './images/result_6_8.png';
-	  } else {
-	    return './images/result_9_10.png';
-	  }
-	}
+function getResultImage(correctAnswers) {
+  let quote;
+  let imagePath;
+  if (correctAnswers <= 2) {
+    quote = quotes[0];
+    imagePath = './images/result_0_2.png';
+  } else if (correctAnswers <= 5) {
+    quote = quotes[1];
+    imagePath = './images/result_3_5.png';
+  } else if (correctAnswers <= 8) {
+    quote = quotes[2];
+    imagePath = './images/result_6_8.png';
+  } else {
+    quote = quotes[3];
+    imagePath = './images/result_9_10.png';
+  }
+  // Display the quote
+  document.getElementById('quote').innerText = quote;
+  return imagePath;
+}
 
 	function disableInteractions() {
 	  $('.btn').prop('disabled', true);
