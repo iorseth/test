@@ -336,16 +336,19 @@ function resetGame() {
 function displayChart() {
   $('.card-container').hide();
   const resultImageURL = getResultImage(lives);
-  const resultImage = $('<img id="resultImage" src="" alt="Result image">');
+  
+  // Select the img element with id resultImage
+  const resultImage = $('#resultImage');
   resultImage.attr('src', resultImageURL);
-  $('.container').append(resultImage);
-
+  
   // Remove the personalized message with the score
   const retryButton = $('<button class="btn btn-try-again btn-lg mt-4">&#x21BA;</button>');
   retryButton.click(resetGame);
   $('.container').append(retryButton);
-  $('#resultImage').show();
-  $('#resultImage').css({
+  
+  // Show the result image
+  resultImage.show();
+  resultImage.css({
     width: '50%', // Adjust the percentage to resize the image
     height: 'auto'
   });
