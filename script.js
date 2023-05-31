@@ -337,9 +337,11 @@ function displayChart() {
   $('.card-container').hide();
   const resultImageURL = getResultImage(lives);
   
-  // Select the img element with id resultImage
+  // Select the div element with id resultImage
   const resultImage = $('#resultImage');
-  resultImage.attr('src', resultImageURL);
+  
+  // Set the background image of the div
+  resultImage.css('background-image', 'url(' + resultImageURL + ')');
   
   // Remove the personalized message with the score
   const retryButton = $('<button class="btn btn-try-again btn-lg mt-4">&#x21BA;</button>');
@@ -350,7 +352,9 @@ function displayChart() {
   resultImage.show();
   resultImage.css({
     width: '50%', // Adjust the percentage to resize the image
-    height: 'auto'
+    height: 'auto',
+    backgroundSize: 'cover', // Ensure the background image covers the entire div
+    backgroundPosition: 'center' // Center the background image
   });
 }
 
